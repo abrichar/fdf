@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/06/16 17:40:58 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/06/16 18:17:04 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,26 @@ int key_react(int keycode, void **tab)
 	return (0);
 }
 
-int main()
+int parsing(int fd)
 {
-	void *mlx;
-	void *win;
-	int *tab[2];
 
+	while((ret = read(fd,
+}
+
+int main(int argc, char **argv)
+{
+	void	*mlx;
+	void	*win;
+	int		fd;
+	int		*tab[2];
+
+	if (argc != 2)
+		return (0);
+	fd = open(name, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	else
+		parsing(fd);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 1000, 1000, "fdf");
 	tab[0] = mlx;
