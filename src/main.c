@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/06/17 16:12:20 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/06/17 18:07:48 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ int main(int argc, char **argv)
 	void	*win;
 	int		fd;
 	int		*tab[2];
+	int		*tab_pars;
 
+	tab_pars = NULL;
 	if (argc != 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (0);
 	else
-		if (parsing(fd) == -1)
+		if (parsing(fd, tab_pars) == -1)
 			return (0);
 	if (close(fd) == -1)
 		ft_putstr("Erreur dans la fermeture du fichier");
