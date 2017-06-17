@@ -6,12 +6,11 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/06/17 15:31:42 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/06/17 16:12:20 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "../libft/includes/libft.h"
+#include "fdf.h"
 
 int key_react(int keycode, void **tab)
 {
@@ -19,18 +18,6 @@ int key_react(int keycode, void **tab)
 	{
 		mlx_destroy_window(tab[0], tab[1]);
 		exit(EXIT_SUCCESS);
-	}
-	return (0);
-}
-
-int parsing(int fd)
-{
-	int ret;
-	char *line;
-
-	while (get_next_line(fd, &line) == 1)
-	{
-		printf("%s\n", line);
 	}
 	return (0);
 }
@@ -48,7 +35,8 @@ int main(int argc, char **argv)
 	if (fd == -1)
 		return (0);
 	else
-		parsing(fd);
+		if (parsing(fd) == -1)
+			return (0);
 	if (close(fd) == -1)
 		ft_putstr("Erreur dans la fermeture du fichier");
 	mlx = mlx_init();

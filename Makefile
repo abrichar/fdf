@@ -6,15 +6,16 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/06/17 15:34:01 by abrichar         ###   ########.fr        #
+#    Updated: 2017/06/17 16:13:19 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-FDF_FLAGS = -lmlx -framework OpenGL -framework AppKit
+FDFFLAGS = -lmlx -framework OpenGL -framework AppKit
+CPPFLAGS = -Iincludes/
 
-SRC_NAME = main.c
+SRC_NAME = main.c parsing.c
 SRC_PATH = src
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
@@ -27,7 +28,7 @@ LIB = libft/libft.a
 all: $(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(SRC) $(LIB) $(FDF_FLAGS)
+	gcc -o $(NAME) $(SRC) $(LIB) $(FDFFLAGS) $(CPPFLAGS)
 
 clean:
 
