@@ -7,7 +7,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/06/17 18:14:49 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/06/21 17:21:06 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int verif(char *line)
     return (0);
 }
 
-int parsing(int fd, int *tab_pars)
+int parsing(int fd, char **tab_pars)
 {
 	int i;
 	int j;
@@ -41,9 +41,9 @@ int parsing(int fd, int *tab_pars)
             return (-1);
         to_convert = ft_strsplit(line, ' ');
 		while (to_convert[i])
-		{//ça segfault ici lel
-			tab_pars[i] = (int)malloc(sizeof(to_convert[i]));
-			tab_pars[i] = ft_atoi(to_convert[i]);
+		{
+			tab_pars[i] = (char*)malloc(sizeof(to_convert[i]) + 1);
+			tab_pars[j][i] = to_convert[0][i];
 			i++;
 		}
 		j++;

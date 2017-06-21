@@ -6,14 +6,14 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/06/17 17:38:01 by abrichar         ###   ########.fr        #
+#    Updated: 2017/06/21 17:33:22 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
 FDFFLAGS = -lmlx -framework OpenGL -framework AppKit
-CPPFLAGS = -Iincludes/
+CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
 
 SRC_NAME = main.c parsing.c
