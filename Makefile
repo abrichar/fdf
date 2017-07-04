@@ -6,7 +6,7 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/06/21 17:33:22 by abrichar         ###   ########.fr        #
+#    Updated: 2017/07/04 14:46:56 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,12 +24,13 @@ OBJ_PATH = obj
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 LIB = libft/libft.a
+MinilibX = MinilibX/libmlx.a
 
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(SRC) $(LIB) $(FDFFLAGS) $(CPPFLAGS)
+	gcc -o $(NAME) $(SRC) $(LIB) $(MinilibX) $(CPPFLAGS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
