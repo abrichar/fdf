@@ -6,13 +6,13 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/07/04 14:46:56 by abrichar         ###   ########.fr        #
+#    Updated: 2017/07/04 17:50:19 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-FDFFLAGS = -lmlx -framework OpenGL -framework AppKit
+FRAMEWORK = -framework OpenGl -framework Appkit
 CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
 
@@ -24,23 +24,28 @@ OBJ_PATH = obj
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 LIB = libft/libft.a
-MinilibX = MinilibX/libmlx.a
-
+MLX = mlx_source/libmlx.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(SRC) $(LIB) $(MinilibX) $(CPPFLAGS)
+	@cd libft; $(MAKE) -f Makefile
+	@cd mlx_source; $(MAKE) -f Makefile
+	gcc -o $(NAME) $(SRC) $(LIB) $(MLX) $(CPPFLAGS) $(FRAMEWORK)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	gcc $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
+	@cd libft; $(MAKE) -f Makefile clean
+	@cd mlx_source; $(MAKE) -f Makefile clean
 	/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
 	/bin/rm -f $(NAME)
+	/bin/rm -f $(MLX)
+	/bin/rm -f $(LIB)
 
 re: fclean all
 

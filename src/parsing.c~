@@ -7,7 +7,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/04 18:23:21 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/04 18:23:07 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int parsing(int fd, char **tab_pars)
 	j = 0;
     while (get_next_line(fd, &line) == 1)
     {
-		printf("ligne : %s \n", line);
+		printf("ligne : %s", line);
 		i = 0;
 		if (verif(line) == 0)
 			return (-1);
