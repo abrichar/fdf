@@ -7,7 +7,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/04 18:23:21 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/11 18:18:19 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int parsing(int fd, char **tab_pars)
     char **to_convert;
 
 	j = 0;
+	tab_pars = (char **)malloc(sizeof(to_convert) + 1);
     while (get_next_line(fd, &line) == 1)
     {
 		printf("ligne : %s \n", line);
@@ -41,13 +42,13 @@ int parsing(int fd, char **tab_pars)
 		if (verif(line) == 0)
 			return (-1);
         to_convert = ft_strsplit(line, ' ');
+		tab_pars[j] = (char *)malloc(sizeof(to_convert[j]) + 1);
 		while (to_convert[i])
 		{
-			printf("test : Convert de i : %s \n", to_convert[i]);
-			tab_pars[i] = (char*)malloc(sizeof(to_convert[i]) + 1);
-			tab_pars[j][i] = to_convert[0][i];
+			tab_pars[j] = to_convert[j];
 			i++;
 		}
+		printf("test : Convert de i : %s \n", to_convert[j]);
 		j++;
     }
     return (0);
