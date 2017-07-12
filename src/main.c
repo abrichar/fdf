@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/11 17:28:18 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/12 17:07:37 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	void	*win;
 	int		fd;
 	int		*tab[2];
-	char	**tab_pars;
+	int		**tab_pars;
 
 	tab_pars = NULL;
 	if (argc != 2)

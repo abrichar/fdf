@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/06/21 17:05:33 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/12 17:08:21 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 int key_react(int keycode, void **tab);
 int main (int argc, char **argv);
-int parsing (int fd, char **tab_pars);
+int parsing (int fd, int **tab_pars);
 
 #endif
