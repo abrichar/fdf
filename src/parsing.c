@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/12 17:39:37 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/12 17:56:18 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /*
 ** fonction verif : Vérifie le formatage de la map.
+** Attention présence de problème quand je lance pylone (?)
+** Possible que ça soit a cause de la trop grosse quantite de données (?)
 ** fonction parsing : Parse en int la map dans un tableau en deux dimensions.
 */
 
@@ -22,12 +24,13 @@ static int	verif(char *line)
 	int i;
 
 	i = 0;
-	while ((line[i] == ' ' || (line[i] < 58 && line[i] > 47)) && line[i])
+	while (((line[i] == ' ' || (line[i] < 58 && line[i] > 47)) && line[i])
+		|| line[i] == '-')
 		i++;
 	if (line[i] == '\0')
 		return (1);
-	ft_putstr("Erreur dans le formatage de la map,veuillez n'utiliser
-				que des nombres et des espaces.\n");
+	ft_putstr("Erreur dans le formatage de la map");
+	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n ");
 	return (0);
 }
 

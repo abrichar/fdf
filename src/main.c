@@ -6,13 +6,13 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/12 17:07:37 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/12 17:57:42 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int key_react(int keycode, void **tab)
+int		key_react(int keycode, void **tab)
 {
 	if (keycode == 53)
 	{
@@ -22,7 +22,7 @@ int key_react(int keycode, void **tab)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
@@ -36,9 +36,8 @@ int main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (0);
-	else
-		if (parsing(fd, tab_pars) == -1)
-			return (0);
+	else if (parsing(fd, tab_pars) == -1)
+		return (0);
 	if (close(fd) == -1)
 		ft_putstr("Erreur dans la fermeture du fichier");
 	mlx = mlx_init();
