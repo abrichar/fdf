@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/12 17:56:18 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/16 18:46:01 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	verif(char *line)
 	if (line[i] == '\0')
 		return (1);
 	ft_putstr("Erreur dans le formatage de la map");
-	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n ");
+	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n");
 	return (0);
 }
 
@@ -45,7 +45,6 @@ int			parsing(int fd, int **tab_pars)
 	tab_pars = (int **)malloc(sizeof(to_convert) + 1);
 	while (get_next_line(fd, &line) == 1)
 	{
-		printf("ligne : %s \n", line);
 		i = 0;
 		if (verif(line) == 0)
 			return (-1);
@@ -53,10 +52,13 @@ int			parsing(int fd, int **tab_pars)
 		tab_pars[j] = (int *)malloc(sizeof(to_convert[j]) + 1);
 		while (to_convert[i])
 		{
+			tab_pars[j][i] = (int)malloc(sizeof(int));
 			tab_pars[j][i] = ft_atoi(to_convert[i]);
 			i++;
 		}
 		j++;
 	}
+	if (!tab_pars)
+		return (-1);
 	return (0);
 }
