@@ -6,16 +6,15 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/07/16 18:26:42 by abrichar         ###   ########.fr        #
+#    Updated: 2017/07/26 17:08:35 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
 FRAMEWORK = -framework OpenGl -framework Appkit
-CPPFLAGS = -Iincludes/ -I /usr/local/include $(SEGFAULTFLAG)
+CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
-SEGFAULTFLAG = -g3 -fsanitize=address
 
 SRC_NAME = main.c parsing.c draw.c
 SRC_PATH = src

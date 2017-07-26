@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/16 18:46:01 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/26 18:08:55 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	verif(char *line)
 	return (0);
 }
 
-int			parsing(int fd, int **tab_pars)
+int			**parsing(int fd, int **tab_pars)
 {
 	int		i;
 	int		j;
@@ -47,18 +47,16 @@ int			parsing(int fd, int **tab_pars)
 	{
 		i = 0;
 		if (verif(line) == 0)
-			return (-1);
+			return (NULL);
 		to_convert = ft_strsplit(line, ' ');
 		tab_pars[j] = (int *)malloc(sizeof(to_convert[j]) + 1);
 		while (to_convert[i])
 		{
-			tab_pars[j][i] = (int)malloc(sizeof(int));
+			tab_pars[j][i] = (int)malloc(sizeof(int) + 1);
 			tab_pars[j][i] = ft_atoi(to_convert[i]);
 			i++;
 		}
 		j++;
 	}
-	if (!tab_pars)
-		return (-1);
-	return (0);
+	return (tab_pars);
 }

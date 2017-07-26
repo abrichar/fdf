@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 17:37:30 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/16 18:07:34 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/26 18:02:34 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void	draw(int **tab, int **tab_pars)
 	pixel[1] = 200;
 	mlx_pixel_put(tab[0], tab[1], pixel[0], pixel[1], 0x00FF00FF);
 	index[1]++;
+	if (!tab_pars)
+		ft_putstr("prout");
 	while (index[1] != 10)
 	{
-		if (tab_pars[index[0]][index[1]] == tab_pars[index[0]][index[1] - 1])
+		to_go = pixel[0] + 50;
+		while (pixel[0] != to_go)
 		{
-			to_go = pixel[0] + 50;
-			while (pixel[0] != to_go)
-			{
-				mlx_pixel_put(tab[0], tab[1], pixel[0], pixel[1], 0x00FF00FF);
-				pixel[0]++;
-			}
+			mlx_pixel_put(tab[0], tab[1], pixel[0], pixel[1], 0x00FF00FF);
+			pixel[0]++;
 		}
 		index[1]++;
 	}

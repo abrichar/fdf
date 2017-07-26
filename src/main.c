@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/16 18:45:56 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/07/26 18:08:15 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (0);
-	else if (parsing(fd, tab_pars) == -1)
+	tab_pars = parsing(fd, tab_pars);
+	if (!tab_pars)
 		return (0);
 	if (close(fd) == -1)
 		ft_putstr("Erreur dans la fermeture du fichier");
@@ -44,6 +45,7 @@ int		main(int argc, char **argv)
 	win = mlx_new_window(mlx, 1000, 1000, "fdf");
 	tab[0] = mlx;
 	tab[1] = win;
+	draw(tab, tab_pars);
 	mlx_key_hook(win, key_react, tab);
 	mlx_loop(mlx);
 }
