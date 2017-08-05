@@ -6,7 +6,7 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/07/26 17:08:35 by abrichar         ###   ########.fr        #
+#    Updated: 2017/08/05 20:10:29 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,8 @@ FRAMEWORK = -framework OpenGl -framework Appkit
 CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
 
-SRC_NAME = main.c parsing.c draw.c
+SRC_NAME = main.c parsing.c draw.c \
+	draw_oct1.c draw_oct2.c draw_straight.c
 SRC_PATH = src
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
