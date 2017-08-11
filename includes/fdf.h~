@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/08/11 02:17:24 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/08/11 02:16:00 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FDF_H
 # include "mlx.h"
 # include "../libft/includes/libft.h"
-# define PIXEL_Y 1000
-# define PIXEL_X 750
+# define PIXEL_Y 1500
+# define PIXEL_X 1000
 
 typedef struct s_map
 {

@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/07/26 18:08:55 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/08/11 03:59:32 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** fonction parsing : Parse en int la map dans un tableau en deux dimensions.
 */
 
-static int	verif(char *line)
+static int		verif(char *line)
 {
 	int i;
 
@@ -28,13 +28,32 @@ static int	verif(char *line)
 		|| line[i] == '-')
 		i++;
 	if (line[i] == '\0')
-		return (1);
+		return (i);
 	ft_putstr("Erreur dans le formatage de la map");
 	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n");
 	return (0);
 }
 
-int			**parsing(int fd, int **tab_pars)
+static void		cal_for_malloc(int fd, t_map *map)
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	j = 0;
+	map->max_x = 0;
+	map->max_y = 0;
+	while (get_next_line(fd, &line) == 1)
+    {
+        i = verif(line);
+		if (i > map->max_x)
+			map->max_x = i;
+        j++;
+    }
+	map->max_y = j;
+}
+
+int				parsing(int fd, t_map *map)
 {
 	int		i;
 	int		j;
@@ -42,21 +61,24 @@ int			**parsing(int fd, int **tab_pars)
 	char	**to_convert;
 
 	j = 0;
-	tab_pars = (int **)malloc(sizeof(to_convert) + 1);
+	cal_for_malloc(fd, map);
+	map->tab_pars = (int **)malloc(sizeof(int *) * map->max_y);
 	while (get_next_line(fd, &line) == 1)
 	{
 		i = 0;
 		if (verif(line) == 0)
-			return (NULL);
+			return (0);
 		to_convert = ft_strsplit(line, ' ');
-		tab_pars[j] = (int *)malloc(sizeof(to_convert[j]) + 1);
+		map->tab_pars[j] = (int *)malloc(sizeof(int) * map->max_x);
 		while (to_convert[i])
 		{
-			tab_pars[j][i] = (int)malloc(sizeof(int) + 1);
-			tab_pars[j][i] = ft_atoi(to_convert[i]);
+			map->tab_pars[j][i] = ft_atoi(to_convert[i]);
 			i++;
 		}
 		j++;
 	}
-	return (tab_pars);
+	map->max_y = j;
+	map->max_x = i;
+	ft_putstr("parsing : OK\n");
+	return (1);
 }
