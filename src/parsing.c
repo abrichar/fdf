@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/08/11 03:59:32 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/08/12 17:57:38 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,25 @@
 static int		verif(char *line)
 {
 	int i;
+	int cmp;
 
+	cmp = 0;
 	i = 0;
 	while (((line[i] == ' ' || (line[i] < 58 && line[i] > 47)) && line[i])
 		|| line[i] == '-')
+	{
+		if ((line[i] < 58 && line[i] > 47) && (line[i - 1] == ' ' || line[i - 1] == '-'))
+			cmp++;
 		i++;
+	}
 	if (line[i] == '\0')
-		return (i);
+		return (cmp);
 	ft_putstr("Erreur dans le formatage de la map");
 	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n");
 	return (0);
 }
 
-static void		cal_for_malloc(int fd, t_map *map)
+int			call_for_malloc(int fd, t_map *map, char *file)
 {
 	int		i;
 	int		j;
@@ -42,7 +48,6 @@ static void		cal_for_malloc(int fd, t_map *map)
 
 	j = 0;
 	map->max_x = 0;
-	map->max_y = 0;
 	while (get_next_line(fd, &line) == 1)
     {
         i = verif(line);
@@ -51,6 +56,12 @@ static void		cal_for_malloc(int fd, t_map *map)
         j++;
     }
 	map->max_y = j;
+	if (close(fd) == -1)
+        ft_putstr("Erreur dans la fermeture du fichier");
+    fd = open(file, O_RDONLY);
+    if (fd == -1)
+        return (0);
+	return (1);
 }
 
 int				parsing(int fd, t_map *map)
@@ -61,7 +72,6 @@ int				parsing(int fd, t_map *map)
 	char	**to_convert;
 
 	j = 0;
-	cal_for_malloc(fd, map);
 	map->tab_pars = (int **)malloc(sizeof(int *) * map->max_y);
 	while (get_next_line(fd, &line) == 1)
 	{
@@ -75,10 +85,11 @@ int				parsing(int fd, t_map *map)
 			map->tab_pars[j][i] = ft_atoi(to_convert[i]);
 			i++;
 		}
+		if (map->max_x < i || !map->max_x)
+			map->max_x = i;
 		j++;
 	}
 	map->max_y = j;
-	map->max_x = i;
 	ft_putstr("parsing : OK\n");
 	return (1);
 }
