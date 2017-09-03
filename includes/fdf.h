@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/08/13 20:47:23 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/08/15 17:48:21 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "mlx.h"
 # include <stdio.h> ///////////////////////////////////////////////
 # include "../libft/includes/libft.h"
+# include <math.h>
 # define PIXEL_Y 1000
 # define PIXEL_X 750
 # define COLOR 0x0000FFFF
@@ -23,6 +24,12 @@ typedef struct s_pixel
 {
 	int x;
 	int y;
+	int z;
+	int x_display;
+	int y_display;
+	double A;
+	double B;
+	double C;
 }				t_pixel;
 
 typedef struct s_line

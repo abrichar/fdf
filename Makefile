@@ -6,7 +6,7 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/08/12 17:19:16 by abrichar         ###   ########.fr        #
+#    Updated: 2017/09/03 16:39:28 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,6 +15,7 @@ NAME = fdf
 FRAMEWORK = -framework OpenGl -framework Appkit
 CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
+E1E2 = -lmlx
 
 SRC_NAME = main.c parsing.c draw.c
 SRC_PATH = src
@@ -31,6 +32,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@cd libft; $(MAKE) -f Makefile
 	@cd mlx_source; $(MAKE) -f Makefile
+#	gcc -o $(NAME) $(SRC) $(LIB) $(E1E2) $(CPPFLAGS) $(FRAMEWORK)
 	gcc -o $(NAME) $(SRC) $(LIB) $(MLX) $(CPPFLAGS) $(FRAMEWORK)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
