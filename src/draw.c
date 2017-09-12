@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/09/03 17:54:06 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/09/12 18:58:51 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void new_position(t_pixel *pixel)
 	pixel->x_display = pixel->y * cos(pixel->B) * cos(pixel->C);
     pixel->x_display += pixel->x * -sin(pixel->C) * cos(pixel->B);
     pixel->x_display += pixel->z * sin(pixel->B);
-	pixel->y_display = (int)(pixel->y * (cos(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + sin(pixel->C) * cos(pixel->A)) + pixel->x * (-sin(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + cos(pixel->C) * cos(pixel->A)) + pixel->z * -sin(pixel->A) * cos(pixel->B));
+	pixel->y_display = (int)(pixel->y * (cos(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + sin(pixel->C) *  cos(pixel->A)) + pixel->x * (-sin(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + cos(pixel->C) * cos(pixel->A)) + pixel->z * -sin(pixel->A) * cos(pixel->B));
 
 }
 
@@ -94,17 +94,20 @@ void		display_spot(t_map *map, void **tab)
 		{
 			//changer la fonction pour qu elle affiche la bonne position de x
 			//et d'y, grace a la fonction new_position.
+			//actuellement, part dans line mais dans line, les nouvelles
+			//valeurs ne sont pas encore actualisés.
 			pixel.z = map->tab_pars[j][i];
-			mlx_pixel_put(tab[0], tab[1], pixel.x, pixel.y, COLOR);
+			if (pixel.z != 0)
+				new_position(&pixel);
+			mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);
 			if (i + 1 < map->max_x)
 				draw_horizontal(pixel, map, begin, tab);
 			if (j + 1 < map->max_y)
 				draw_vertical(pixel, map, begin, tab);
 			pixel.x += ((PIXEL_Y - (begin * 2)) / (map->max_x - 1));
 			i++;
-
 		}
 		j++;
-		pixel.y += ((PIXEL_X - (begin * 2)) / (map->max_y - 1));
+		pixel.y += ((PIXEL_Y - (begin * 2)) / (map->max_x - 1));
 	}
 }

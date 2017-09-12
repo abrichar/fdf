@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/08/15 17:48:21 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/09/06 18:08:23 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/includes/libft.h"
 # include <math.h>
 # define PIXEL_Y 1000
-# define PIXEL_X 750
+# define PIXEL_X 1000
 # define COLOR 0x0000FFFF
 
 typedef struct s_pixel
