@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 14:58:16 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/10/02 14:27:10 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,38 @@
 
 static void new_position(t_pixel *pixel, t_map *map)
 {
-	int tmp1;
-	int tmp2;
+	/*if (!pixel->A && !pixel->B && !pixel->C)
+	{
+		pixel->A = 0;
+		pixel->B = 0;
+		pixel->C = 0;
+	}
+	pixel->x_display = pixel->y * cos(pixel->B) * cos(pixel->C);
+    pixel->x_display += pixel->x * -sin(pixel->C) * cos(pixel->B);
+    pixel->x_display += pixel->z * sin(pixel->B);
+	pixel->y_display = (int)(pixel->y * (cos(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + sin(pixel->C) *  cos(pixel->A)) + pixel->x * (-sin(pixel->C) * -sin(pixel->A) * -sin(pixel->B) + cos(pixel->C) * cos(pixel->A)) + pixel->z * 2 * -sin(pixel->A) * cos(pixel->B));
+	*/
 
-	tmp1 = PIXEL_X / map->max_x;
-	tmp2 = PIXEL_Y / (map->max_y + map->max_x);
-	if (tmp2 < tmp1)
-		tmp1 = tmp2;
-	pixel->x_display = (PIXEL_X / 2) + (pixel->x - pixel->y) * tmp1;
-	pixel->y_display = (pixel->x + pixel->y) * tmp1 + pixel->z * -5;
+	pixel->x_display = ((float)PIXEL_X / 2) + (pixel->x - pixel->y) * (float)((float)PIXEL_X / (float)map->max_x);
+	pixel->y_display = (pixel->x + pixel->y) * (float)((float)PIXEL_Y / (float)map->max_y) + pixel->z;
 }
 
-static void	draw_vertical(t_pixel pixel, t_map *map, void **tab)
+static void	draw_vertical(t_pixel pixel, t_map *map, int begin, void **tab)
 {
 	t_pixel	pixel_next;
 
 	pixel_next.x = pixel.x;
-	pixel_next.y = pixel.y + 1;
-	pixel_next.z = map->tab_pars[pixel_next.y][pixel_next.x];
+	pixel_next.y = pixel.y + ((PIXEL_X - (begin * 2)) / (map->max_y - 1));
 	new_position(&pixel_next, map);
 	line (pixel, pixel_next, tab);
 }
 
-static void	draw_horizontal(t_pixel pixel, t_map *map, void **tab)
+static void	draw_horizontal(t_pixel pixel, t_map *map, int begin, void **tab)
 {
 	t_pixel pixel_next;
 
-	pixel_next.x = pixel.x + 1;
+	pixel_next.x = pixel.x + ((PIXEL_Y - (begin * 2)) / (map->max_x - 1));
 	pixel_next.y = pixel.y;
-	pixel_next.z = map->tab_pars[pixel_next.y][pixel_next.x];
 	new_position(&pixel_next, map);
 	line (pixel, pixel_next, tab);
 }
@@ -78,27 +81,36 @@ void		line(t_pixel pixel0, t_pixel pixel1, void **tab)
 
 void		display_spot(t_map *map, void **tab)
 {
+	int		i;
+	int		j;
 	t_pixel pixel;
+	int		begin;
 
-	pixel.y = 0;
-	while (pixel.y < map->max_y)
+	begin = 40;
+	pixel.y = begin;
+	j = 0;
+	while (j < map->max_y)
 	{
-		pixel.x = 0;
-		while (pixel.x < map->max_x)
+		i = 0;
+		pixel.x = begin;
+		while (i < map->max_x)
 		{
 			//changer la fonction pour qu elle affiche la bonne position de x
 			//et d'y, grace a la fonction new_position.
 			//actuellement, part dans line mais dans line, les nouvelles
 			//valeurs ne sont pas encore actualisés.
-			pixel.z = map->tab_pars[pixel.y][pixel.x];
+			pixel.z = map->tab_pars[j][i];
 			new_position(&pixel, map);
 			mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);
-			if (pixel.x + 1 < map->max_x)
-				draw_horizontal(pixel, map, tab);
-			if (pixel.y + 1 < map->max_y)
-				draw_vertical(pixel, map, tab);
-			pixel.x++;
+		    printf("pix_put %dx%d\n", pixel.x_display, pixel.y_display);
+			if (i + 1 < map->max_x)
+				draw_horizontal(pixel, map, begin, tab);
+			if (j + 1 < map->max_y)
+				draw_vertical(pixel, map, begin, tab);
+			pixel.x += ((PIXEL_Y - (begin * 2)) / (map->max_x - 1));
+			i++;
 		}
-		pixel.y++;
+		j++;
+		pixel.y += ((PIXEL_Y - (begin * 2)) / (map->max_x - 1));
 	}
 }
