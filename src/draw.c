@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 14:58:16 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/10/02 18:47:18 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void new_position(t_pixel *pixel, t_map *map)
 {
-	int tmp1;
-	int tmp2;
+	int distance;
+	double tmp1;
+	double tmp2;
 
-	tmp1 = PIXEL_X / map->max_x;
-	tmp2 = PIXEL_Y / (map->max_y + map->max_x);
-	if (tmp2 < tmp1)
-		tmp1 = tmp2;
-	pixel->x_display = (PIXEL_X / 2) + (pixel->x - pixel->y) * tmp1;
-	pixel->y_display = (pixel->x + pixel->y) * tmp1 + pixel->z * -5;
+	distance = PIXEL_Y / (map->max_y + map->max_x) * ZOOM;
+	tmp1 = (double)pixel->x - ((double)map->max_x / 2);
+	tmp2 = (double)pixel->y - ((double)map->max_y / 2);
+	pixel->x_display = ((PIXEL_X / 2) + ((tmp1 - tmp2) * distance)) + map->moving_h;
+	pixel->y_display = ((PIXEL_Y / 2) + ((tmp1 + tmp2) * distance) + pixel->z * -10) + moving_v;
 }
 
 static void	draw_vertical(t_pixel pixel, t_map *map, void **tab)
@@ -49,7 +49,7 @@ static void	draw_horizontal(t_pixel pixel, t_map *map, void **tab)
 
 void		line(t_pixel pixel0, t_pixel pixel1, void **tab)
 {
-	t_line	line;
+	t_line line;
 
 	line.dx = abs(pixel1.x_display - pixel0.x_display);
 	line.sx = (pixel0.x_display < pixel1.x_display) ? 1 : -1;
@@ -86,10 +86,6 @@ void		display_spot(t_map *map, void **tab)
 		pixel.x = 0;
 		while (pixel.x < map->max_x)
 		{
-			//changer la fonction pour qu elle affiche la bonne position de x
-			//et d'y, grace a la fonction new_position.
-			//actuellement, part dans line mais dans line, les nouvelles
-			//valeurs ne sont pas encore actualisés.
 			pixel.z = map->tab_pars[pixel.y][pixel.x];
 			new_position(&pixel, map);
 			mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);

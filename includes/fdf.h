@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/09/06 18:08:23 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/10/02 18:52:42 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include <stdio.h> ///////////////////////////////////////////////
 # include "../libft/includes/libft.h"
 # include <math.h>
-# define PIXEL_Y 1000
-# define PIXEL_X 1000
+# define PIXEL_Y 800
+# define PIXEL_X 800
 # define COLOR 0x0000FFFF
+# define ZOOM 1
 
 typedef struct s_pixel
 {
@@ -47,9 +48,11 @@ typedef struct	s_map
 	int max_y;
 	int max_x;
 	int **tab_pars;
+	int moving_h;
+	int moving_v;
 }				t_map;
 
-int		key_react (int keycode, void **tab);
+int		key_react (int keycode, void **tab, t_map *map);
 int		main (int argc, char **argv);
 int		parsing (int fd, t_map *map);
 int		call_for_malloc(int fd, t_map *map, char *file);
