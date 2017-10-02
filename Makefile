@@ -6,7 +6,7 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/09/06 17:28:14 by abrichar         ###   ########.fr        #
+#    Updated: 2017/10/02 13:48:29 by abrichar         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,9 +31,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@cd libft; $(MAKE) -f Makefile
-#	@cd mlx_source; $(MAKE) -f Makefile
-	gcc -o $(NAME) $(SRC) $(LIB) $(E1E2) $(CPPFLAGS) $(FRAMEWORK)
-#	gcc -o $(NAME) $(SRC) $(LIB) $(MLX) $(CPPFLAGS) $(FRAMEWORK)
+	@cd mlx_source; $(MAKE) -f Makefile
+#	gcc -o $(NAME) $(SRC) $(LIB) $(E1E2) $(CPPFLAGS) $(FRAMEWORK)
+	gcc -o $(NAME) $(SRC) $(LIB) $(MLX) $(CPPFLAGS) $(FRAMEWORK)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

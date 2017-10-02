@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 14:05:00 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/09/12 18:58:51 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void		display_spot(t_map *map, void **tab)
 			//actuellement, part dans line mais dans line, les nouvelles
 			//valeurs ne sont pas encore actualisés.
 			pixel.z = map->tab_pars[j][i];
-			new_position(&pixel);
+			if (pixel.z != 0)
+				new_position(&pixel);
 			mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);
 			if (i + 1 < map->max_x)
 				draw_horizontal(pixel, map, begin, tab);

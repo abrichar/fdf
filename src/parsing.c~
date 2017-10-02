@@ -6,16 +6,17 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 14:02:34 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/08/12 17:57:38 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**
-** dans verif => exit si erreur.
-**
+** fonction verif : Vérifie le formatage de la map.
+** Attention présence de problème quand je lance pylone (?)
+** Possible que ça soit a cause de la trop grosse quantite de données (?)
+** fonction parsing : Parse en int la map dans un tableau en deux dimensions.
 */
 
 static int		verif(char *line)
@@ -35,8 +36,8 @@ static int		verif(char *line)
 	if (line[i] == '\0')
 		return (cmp);
 	ft_putstr("Erreur dans le formatage de la map");
-	ft_putstr(", veuillez n'utilisez que des nombres et des espaces.\n");
-	exit(0);
+	ft_putstr(",veuillez n'utilisez que des nombres et des espaces.\n");
+	return (0);
 }
 
 int			call_for_malloc(int fd, t_map *map, char *file)
@@ -75,7 +76,8 @@ int				parsing(int fd, t_map *map)
 	while (get_next_line(fd, &line) == 1)
 	{
 		i = 0;
-		ft_putstr("hey\n");
+		if (verif(line) == 0)
+			return (0);
 		to_convert = ft_strsplit(line, ' ');
 		map->tab_pars[j] = (int *)malloc(sizeof(int) * map->max_x);
 		while (to_convert[i])
