@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/03 15:42:04 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/03 15:50:14 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void		line(t_pixel pixel0, t_pixel pixel1, void **tab)
 	line.err = ((line.dx > line.dy) ? line.dx : -(line.dy))/2;
 	while (1)
 	{
-		mlx_pixel_put(tab[0], tab[1], pixel0.x_display, pixel0.y_display, COLOR);
+		if (pixel0.x_display > 0 && pixel0.y_display > 0 && pixel0.x_display < PIXEL_X && pixel0.y_display < PIXEL_Y)
+			mlx_pixel_put(tab[0], tab[1], pixel0.x_display, pixel0.y_display, COLOR);
 		if (pixel0.x_display == pixel1.x_display
 			&& pixel0.y_display == pixel1.y_display)
 			break;
@@ -90,7 +91,8 @@ void		display_spot(t_map *map, void **tab)
 		{
 			pixel.z = map->tab_pars[pixel.y][pixel.x];
 			new_position(&pixel, map);
-			mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);
+			if (pixel.x_display > 0 && pixel.y_display > 0 && pixel.x_display < PIXEL_X && pixel.y_display < PIXEL_Y)
+				mlx_pixel_put(tab[0], tab[1], pixel.x_display, pixel.y_display, COLOR);
 			if (pixel.x + 1 < map->max_x)
 				draw_horizontal(pixel, map, tab);
 			if (pixel.y + 1 < map->max_y)
