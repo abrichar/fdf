@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/12 16:52:49 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 18:47:18 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/03 15:42:04 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 static void new_position(t_pixel *pixel, t_map *map)
 {
 	int distance;
+	int hauteur;
 	double tmp1;
 	double tmp2;
 
-	distance = PIXEL_Y / (map->max_y + map->max_x) * ZOOM;
+	distance = PIXEL_Y / (map->max_y + map->max_x) * map->zoom;
+	hauteur = pixel->z * -10 * map->zoom;
 	tmp1 = (double)pixel->x - ((double)map->max_x / 2);
 	tmp2 = (double)pixel->y - ((double)map->max_y / 2);
 	pixel->x_display = ((PIXEL_X / 2) + ((tmp1 - tmp2) * distance)) + map->moving_h;
-	pixel->y_display = ((PIXEL_Y / 2) + ((tmp1 + tmp2) * distance) + pixel->z * -10) + moving_v;
+	pixel->y_display = ((PIXEL_Y / 2) + ((tmp1 + tmp2) * distance) + hauteur) + map->moving_v;
 }
 
 static void	draw_vertical(t_pixel pixel, t_map *map, void **tab)

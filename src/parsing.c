@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/02 15:46:36 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/03 14:47:23 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,15 @@ int				parsing(int fd, t_map *map)
 
 	j = 0;
 	map->tab_pars = (int **)malloc(sizeof(int *) * map->max_y);
+	if (map->tab_pars == NULL)
+		return (0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		i = 0;
 		to_convert = ft_strsplit(line, ' ');
 		map->tab_pars[j] = (int *)malloc(sizeof(int) * map->max_x);
+		if (map->tab_pars[j] == NULL)
+		return (0);
 		while (to_convert[i])
 		{
 			map->tab_pars[j][i] = ft_atoi(to_convert[i]);

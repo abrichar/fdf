@@ -6,7 +6,7 @@
 #    By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:47:20 by abrichar          #+#    #+#              #
-#    Updated: 2017/10/02 13:48:29 by abrichar         ###   ########.fr        #
+#    Updated: 2017/10/03 12:28:42 by eliajin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ CPPFLAGS = -Iincludes/ -I /usr/local/include
 CFLAGS = -Wall -Werror -Wextra
 E1E2 = -lmlx
 
-SRC_NAME = main.c parsing.c draw.c
+SRC_NAME = main.c parsing.c draw.c keyreact.c
 SRC_PATH = src
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
