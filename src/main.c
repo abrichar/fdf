@@ -6,20 +6,11 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/03 15:28:59 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/04 14:42:31 by eliajin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*
-** 123 = gauche
-** 124 = droite
-** 125 = bas
-** 126 = haut
-** 6 = z ==> Zoomer
-** 2 = d ==> Dézoomer
-*/
 
 int		key_react(int keycode, void **tab)
 {
@@ -32,7 +23,6 @@ int		key_react(int keycode, void **tab)
 		move_graph(tab, tab[2], keycode);
 	else if (keycode == 6 || keycode == 2)
 		zoom_graph(keycode, tab[2], tab);
-
 	return (1);
 }
 
@@ -63,7 +53,7 @@ int		main(int argc, char **argv)
   	win = mlx_new_window(mlx, PIXEL_Y, PIXEL_X, "fdf");
 	if (!win)
 		exit(0);
-	tab = (void**)malloc(sizeof(void*) * 2);
+	tab = (void**)malloc(sizeof(void*) * 2 + sizeof(t_map) * 1);
 	if (tab == NULL)
 		exit(0);
 	tab[0] = mlx;
