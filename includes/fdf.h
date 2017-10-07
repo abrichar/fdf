@@ -6,7 +6,7 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/07 12:54:41 by abrichar         ###   ########.fr       */
+/*   Updated: 2017/10/07 14:45:59 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ typedef struct	s_map
 	char		*color_center;
 }				t_map;
 
-void	change_color(t_map *map, void **tab);
-void	pixel_colored(void **tab, t_pixel pixel0, t_map *map);
-void	move_graph (void **tab, t_map *map, int keycode);
-void	zoom_graph (int keycode, t_map *map, void **tab);
-int		key_react (int keycode, void **tab);
-int		main (int argc, char **argv);
-int		parsing (int fd, t_map *map);
-int		call_for_malloc(int fd, t_map *map, char *file);
-void	display_spot(t_map *map, void **tab);
-void	line(t_pixel pixel0, t_pixel pixel1, void **tab);
+void			change_color(t_map *map, void **tab);
+void			pixel_colored(void **tab, t_pixel pixel0, t_map *map);
+void			move_graph (void **tab, t_map *map, int keycode);
+void			zoom_graph (int keycode, t_map *map, void **tab);
+int				key_react (int keycode, void **tab);
+int				main (int argc, char **argv);
+int				parsing (int fd, t_map *map);
+int				call_for_malloc(int fd, t_map *map, char *file);
+void			display_spot(t_map *map, void **tab);
+void			line(t_pixel pixel0, t_pixel pixel1, void **tab);
 
 #endif
