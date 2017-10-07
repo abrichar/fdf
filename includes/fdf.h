@@ -6,53 +6,49 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:08:59 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/05 21:14:36 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/07 12:54:41 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "mlx.h"
-# include <stdio.h> ///////////////////////////////////////////////
 # include "../libft/includes/libft.h"
 # include <math.h>
 # define PIXEL_Y 800
 # define PIXEL_X 800
 # define COLOR 0x0000FFFF
 
-typedef struct s_pixel
+typedef struct	s_pixel
 {
-	int x;
-	int y;
-	int z;
-	int x_display;
-	int y_display;
-	double A;
-	double B;
-	double C;
+	int			x;
+	int			y;
+	int			z;
+	int			x_display;
+	int			y_display;
 }				t_pixel;
 
-typedef struct s_line
+typedef struct	s_line
 {
-	int dx;
-	int sx;
-	int dy;
-	int sy;
-	int err;
-	int e2;
+	int			dx;
+	int			sx;
+	int			dy;
+	int			sy;
+	int			err;
+	int			e2;
 }				t_line;
 
 typedef struct	s_map
 {
-	int max_y;
-	int max_x;
-	int **tab_pars;
-	int moving_h;
-	int moving_v;
-	float zoom;
-	char  *color_high;
-	char  *color_bottom;
-    char  *color_center;
+	int			max_y;
+	int			max_x;
+	int			**tab_pars;
+	int			moving_h;
+	int			moving_v;
+	float		zoom;
+	char		*color_high;
+	char		*color_bottom;
+	char		*color_center;
 }				t_map;
 
 void	change_color(t_map *map, void **tab);
