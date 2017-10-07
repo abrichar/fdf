@@ -6,7 +6,7 @@
 /*   By: eliajin <abrichar@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 21:00:01 by eliajin           #+#    #+#             */
-/*   Updated: 2017/10/05 21:20:40 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/07 15:48:02 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	change_color(t_map *map, void **tab)
 		map->color_bottom = "26C4EC";
 		map->color_center = "096A09";
 	}
-	else if (strcmp(map->color_high,"8B6C42") == 0)
+	else if (strcmp(map->color_high, "8B6C42") == 0)
 	{
 		map->color_high = "AFA77B";
 		map->color_bottom = "25FDE9";
-		map->color_center = "83A697";
+		map->color_center = "00FF00";
 	}
 	else
 	{

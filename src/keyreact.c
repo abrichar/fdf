@@ -6,7 +6,7 @@
 /*   By: eliajin <abrichar@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 18:31:12 by eliajin           #+#    #+#             */
-/*   Updated: 2017/10/03 15:30:31 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/07 15:01:49 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	zoom_graph(int keycode, t_map *map, void **tab)
 	{
 		map->zoom *= 2;
 	}
-	else map->zoom /= 2;
+	else
+		map->zoom /= 2;
 	display_spot(tab[2], tab);
 }
 

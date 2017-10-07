@@ -6,29 +6,24 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/17 16:06:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/03 14:47:23 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/07 15:45:18 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-**
-** dans verif => exit si erreur.
-**
-*/
-
-static int		verif(char *line)
+static int	verif(char *line)
 {
-	int i;
-	int cmp;
+	int		i;
+	int		cmp;
 
 	cmp = 0;
 	i = 0;
 	while (((line[i] == ' ' || (line[i] < 58 && line[i] > 47)) && line[i])
 		|| line[i] == '-')
 	{
-		if ((line[i] < 58 && line[i] > 47) && (line[i - 1] == ' ' || line[i - 1] == '-'))
+		if ((line[i] < 58 && line[i] > 47) &&
+			(line[i - 1] == ' ' || line[i - 1] == '-'))
 			cmp++;
 		i++;
 	}
@@ -48,22 +43,22 @@ int			call_for_malloc(int fd, t_map *map, char *file)
 	j = 0;
 	map->max_x = 0;
 	while (get_next_line(fd, &line) == 1)
-    {
-        i = verif(line);
+	{
+		i = verif(line);
 		if (i > map->max_x)
 			map->max_x = i;
-        j++;
-    }
+		j++;
+	}
 	map->max_y = j;
 	if (close(fd) == -1)
-        ft_putstr("Erreur dans la fermeture du fichier");
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
-        return (0);
+		ft_putstr("Erreur dans la fermeture du fichier");
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
 	return (1);
 }
 
-int				parsing(int fd, t_map *map)
+int			parsing(int fd, t_map *map)
 {
 	int		i;
 	int		j;
@@ -76,16 +71,13 @@ int				parsing(int fd, t_map *map)
 		return (0);
 	while (get_next_line(fd, &line) == 1)
 	{
-		i = 0;
+		i = -1;
 		to_convert = ft_strsplit(line, ' ');
 		map->tab_pars[j] = (int *)malloc(sizeof(int) * map->max_x);
 		if (map->tab_pars[j] == NULL)
-		return (0);
-		while (to_convert[i])
-		{
+			return (0);
+		while (to_convert[++i])
 			map->tab_pars[j][i] = ft_atoi(to_convert[i]);
-			i++;
-		}
 		if (map->max_x < i || !map->max_x)
 			map->max_x = i;
 		j++;

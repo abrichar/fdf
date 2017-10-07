@@ -6,50 +6,13 @@
 /*   By: abrichar <abrichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 16:23:25 by abrichar          #+#    #+#             */
-/*   Updated: 2017/10/05 21:20:15 by eliajin          ###   ########.fr       */
+/*   Updated: 2017/10/07 15:38:14 by abrichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int hex_char_to_dec(char c)
-{
-    if ('0' <= c && c <= '9')
-        return (c - '0');
-    else if ('A' <= c && c <= 'F')
-        return (c - 'A' + 10);
-    else if ('a' <= c && c <= 'f')
-        return (c - 'a' + 10);
-    return -1;
-}
-
-static int hex_to_dec(char *str)
-{
-    int nb;
-	int i;
-
-	nb = 0;
-	i = 0;
-    while (str[i] != '\0')
-    {
-        nb *= 16;
-        nb += hex_char_to_dec(str[i]);
-		i++;
-    }
-    return nb;
-}
-
-void	pixel_colored(void **tab, t_pixel pixel0, t_map *map)
-{
-	if (pixel0.z > 10)
-		mlx_pixel_put(tab[0], tab[1], pixel0.x_display, pixel0.y_display, hex_to_dec(map->color_high));
-	else if (pixel0.z < 0)
-		mlx_pixel_put(tab[0], tab[1], pixel0.x_display, pixel0.y_display, hex_to_dec(map->color_bottom));
-	else mlx_pixel_put(tab[0], tab[1], pixel0.x_display, pixel0.y_display, hex_to_dec(map->color_center));
-}
-
-
-int		key_react(int keycode, void **tab)
+int			key_react(int keycode, void **tab)
 {
 	if (keycode == 53)
 	{
@@ -65,34 +28,42 @@ int		key_react(int keycode, void **tab)
 	return (1);
 }
 
-int		main(int argc, char **argv)
+static int	secure_variable(t_map *map, int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	int		fd;
-	void	**tab;
-	t_map	map;
+	int fd;
 
-	map.moving_h = 0;
-	map.moving_v = 0;
-	map.zoom = 1;
-	map.color_high = "AE642D";
-	map.color_bottom = "0000FF";
-	map.color_center = "568203";
+	map->moving_h = 0;
+	map->moving_v = 0;
+	map->zoom = 1;
+	map->color_high = "AE642D";
+	map->color_bottom = "0000FF";
+	map->color_center = "568203";
 	if (argc != 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (0);
-	call_for_malloc(fd, &map, argv[1]);
-	if (parsing(fd, &map) == 0)
+	call_for_malloc(fd, map, argv[1]);
+	if (parsing(fd, map) == 0)
 		return (0);
 	if (close(fd) == -1)
 		ft_putstr("Erreur dans la fermeture du fichier");
+	return (1);
+}
+
+int			main(int argc, char **argv)
+{
+	void	*mlx;
+	void	*win;
+	void	**tab;
+	t_map	map;
+
+	if (secure_variable(&map, argc, argv) != 1)
+		return (0);
 	mlx = mlx_init();
 	if (!mlx)
 		exit(0);
-  	win = mlx_new_window(mlx, PIXEL_Y, PIXEL_X, "fdf");
+	win = mlx_new_window(mlx, PIXEL_Y, PIXEL_X, "fdf");
 	if (!win)
 		exit(0);
 	tab = (void**)malloc(sizeof(void*) * 2 + sizeof(t_map) * 1);
